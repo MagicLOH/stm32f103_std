@@ -135,7 +135,7 @@ static int usart_msp_init(USART_TypeDef *usartx, const uint32_t baudrate)
     USART_InitStructure.USART_HardwareFlowControl = USART_HardwareFlowControl_None;
     USART_InitStructure.USART_Mode = USART_Mode_Rx | USART_Mode_Tx;
     USART_Init(usartx, &USART_InitStructure);
-    USART_Cmd(usartx, ENABLE);
+    
     return 0;
 }
 
@@ -200,5 +200,6 @@ int usartx_init(USART_TypeDef *usartx, const uint32_t baudrate)
     if (usart_nvic_config(usartx))
         return 3;
     
+    USART_Cmd(usartx, ENABLE);
     return 0;
 }
