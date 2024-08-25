@@ -1,12 +1,9 @@
 #ifndef _USART_H_
 #define _USART_H_
 
-#include <stdint.h>
+#include "stm32f10x_usart.h"
 
-void usart1_init(const uint32_t baudrate);
-void usart2_init(const uint32_t baudrate);
-void usart3_init(const uint32_t baudrate);
-
+int usartx_init(USART_TypeDef *usartx, const uint32_t baudrate);
 
 #endif // _USART_H_
 

@@ -30,6 +30,7 @@ void assert_failed(uint8_t *file, uint32_t line)
 
 static void version_display(void)
 {
+    printf("ARMCC_VERSION: %d\r\n", __ARMCC_VERSION);
     printf("SCM_REV: %s\r\n", SCM_REV);
     printf("SCM_BRANCH: %s\r\n", SCM_BRANCH);
     printf("SCM_STEP: %d\r\n", SCM_STEP);
@@ -39,7 +40,7 @@ static void system_init(void)
 {
     delay_init();
     
-    usart1_init(115200);
+    usartx_init(USART1, 115200);
 }
 
 static void bsp_init(void)
