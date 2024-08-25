@@ -1,34 +1,11 @@
 #include <stdio.h>
 
+#include "svc.h"
+
 #include "delay.h"
 #include "usart.h"
 
 #include "led.h"
-
-#ifdef __GNUC__
-/* With GCC/RAISONANCE, small printf (option LD Linker->Libraries->Small printf
-   set to 'Yes') calls __io_putchar() */
-#define PUTCHAR_PROTOTYPE int __io_putchar(int ch)
-#else
-#define PUTCHAR_PROTOTYPE int fputc(int ch, FILE *f)
-#endif /* __GNUC__ */
-
-/**
- * @brief  Retargets the C library printf function to the USART.
- * @param  None
- * @retval None
- */
-PUTCHAR_PROTOTYPE
-{
-	/* Place your implementation of fputc here */
-	/* e.g. write a character to the USART */
-	// USART_SendData(EVAL_COM1, (uint8_t)ch);
-
-	/* Loop until the end of transmission */
-	// while (USART_GetFlagStatus(EVAL_COM1, USART_FLAG_TC) == RESET);
-
-	return ch;
-}
 
 #ifdef USE_FULL_ASSERT
 
@@ -51,11 +28,23 @@ void assert_failed(uint8_t *file, uint32_t line)
 }
 #endif /* USE_FULL_ASSERT */
 
-static void system_clock_init(void)
+static void version_display(void)
 {
-	RCC_ClocksTypeDef rcc_clock;
-	RCC_GetClocksFreq(&rcc_clock);
-	delay_init(rcc_clock.SYSCLK_Frequency);
+    printf("SCM_REV: %s\r\n", SCM_REV);
+    printf("SCM_BRANCH: %s\r\n", SCM_BRANCH);
+    printf("SCM_STEP: %d\r\n", SCM_STEP);
+}
+
+static void system_init(void)
+{
+    delay_init();
+    
+    usart1_init(115200);
+}
+
+static void bsp_init(void)
+{
+    led_init();
 }
 
 /**
@@ -66,21 +55,19 @@ static void system_clock_init(void)
 int main(void)
 {
 	__disable_irq();            /*!< 关闭全局中断 */
-
-	system_clock_init();
-
-	usart1_init(115200);
-
+    system_init();
 	__enable_irq();             /*!< 使能全局中断 */
 
-	led_init();
-	led_set_state(LED_TURNOFF);
+	bsp_init();
+	led_set_state(0);
+    
+    version_display();
 
 	/* Infinite loop */
 	while (1) {
-		led_set_state(LED_TURNON);
+		led_set_state(1);
 		delay_ms(1000);
-		led_set_state(LED_TURNOFF);
+		led_set_state(0);
 		delay_ms(1000);
 	}
 }

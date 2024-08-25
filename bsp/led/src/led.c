@@ -16,7 +16,6 @@ void led_init(void)
 void led_set_state(uint8_t state)
 {
     GPIO_WriteBit(LED0_GPIO_PORT, LED0_GPIO_PIN, (BitAction)state);
-    GPIO_ReadInputDataBit
     // PBout(2) = state;
 }
 

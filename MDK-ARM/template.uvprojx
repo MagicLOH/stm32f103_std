@@ -70,9 +70,9 @@
             <nStopU2X>0</nStopU2X>
           </BeforeCompile>
           <BeforeMake>
-            <RunUserProg1>0</RunUserProg1>
+            <RunUserProg1>1</RunUserProg1>
             <RunUserProg2>0</RunUserProg2>
-            <UserProg1Name></UserProg1Name>
+            <UserProg1Name>D:\_Project\STM32\F103CBT6\_Template\CheckVersion.bat</UserProg1Name>
             <UserProg2Name></UserProg2Name>
             <UserProg1Dos16Mode>0</UserProg1Dos16Mode>
             <UserProg2Dos16Mode>0</UserProg2Dos16Mode>
@@ -339,7 +339,7 @@
               <MiscControls></MiscControls>
               <Define>STM32F103_MD,USE_STDPERIPH_DRIVER</Define>
               <Undefine></Undefine>
-              <IncludePath>..\driver;..\driver\CMSIS\inc;..\driver\STM32F10x_StdPeriph_Driver\inc;..\driver\system\inc;..\bsp\led/inc;..\user\inc</IncludePath>
+              <IncludePath>..\driver;..\driver\CMSIS\inc;..\driver\STM32F10x_StdPeriph_Driver\inc;..\driver\system\inc;..\driver\serial\inc;..\bsp\led/inc;..\user\inc</IncludePath>
             </VariousControls>
           </Cads>
           <Aads>
@@ -409,11 +409,6 @@
               <FilePath>..\driver\STM32F10x_StdPeriph_Driver\src\stm32f10x_gpio.c</FilePath>
             </File>
             <File>
-              <FileName>stm32f10x_pwr.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>..\driver\STM32F10x_StdPeriph_Driver\src\stm32f10x_pwr.c</FilePath>
-            </File>
-            <File>
               <FileName>stm32f10x_rcc.c</FileName>
               <FileType>1</FileType>
               <FilePath>..\driver\STM32F10x_StdPeriph_Driver\src\stm32f10x_rcc.c</FilePath>
@@ -438,10 +433,15 @@
               <FileType>1</FileType>
               <FilePath>..\Driver\System\Src\sys.c</FilePath>
             </File>
+          </Files>
+        </Group>
+        <Group>
+          <GroupName>driver/serial</GroupName>
+          <Files>
             <File>
               <FileName>usart.c</FileName>
               <FileType>1</FileType>
-              <FilePath>..\Driver\System\Src\usart.c</FilePath>
+              <FilePath>..\driver\serial\src\usart.c</FilePath>
             </File>
           </Files>
         </Group>

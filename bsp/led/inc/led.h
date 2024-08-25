@@ -3,9 +3,6 @@
 
 #include <stdint.h>
 
-#define LED_TURNON  1U
-#define LED_TURNOFF 0U
-
 #define LED0_PERIPH_CLK     RCC_APB2Periph_GPIOB
 #define LED0_GPIO_PORT      GPIOB
 #define LED0_GPIO_PIN       GPIO_Pin_2
